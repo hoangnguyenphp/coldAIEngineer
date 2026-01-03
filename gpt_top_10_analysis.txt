@@ -1,0 +1,208 @@
+Phân phối chi tiêu của khách hàng (Customer Spending Distribution)
+
+Câu hỏi trả lời:
+
+Khách hàng chi tiêu nhiều hay ít? Có nhóm “big spender” không?
+
+Phân tích:
+
+Tổng chi tiêu / khách hàng
+
+Chi tiêu trung bình / giao dịch
+
+Ý nghĩa:
+
+Nhận diện khách hàng giá trị cao
+
+Cơ sở upsell thẻ cao cấp
+
+📊 Histogram, boxplot
+
+2️⃣ Tần suất giao dịch của khách hàng (Transaction Frequency)
+
+Câu hỏi:
+
+Khách nào dùng thẻ thường xuyên, khách nào gần như không dùng?
+
+Phân tích:
+
+Số giao dịch / tháng / khách
+
+Active vs inactive user
+
+Ý nghĩa:
+
+Phân biệt khách hàng gắn bó vs ngủ đông
+
+📊 Histogram, bar chart
+
+3️⃣ Hành vi chi tiêu theo danh mục (MCC Spending Behavior)
+
+Câu hỏi:
+
+Khách hàng chi tiền vào đâu?
+
+Phân tích:
+
+Top MCC theo tổng chi tiêu
+
+MCC phổ biến theo nhóm khách
+
+Ý nghĩa:
+
+Gợi ý sản phẩm phù hợp (du lịch, mua sắm, ăn uống…)
+
+📊 Bar chart
+
+4️⃣ Hành vi giao dịch Online vs Offline
+
+Câu hỏi:
+
+Khách hàng thiên về số hóa hay truyền thống?
+
+Phân tích:
+
+% giao dịch online / swipe / chip
+
+Ý nghĩa:
+
+Định hướng sản phẩm số (digital wallet, BNPL)
+
+📊 Pie / stacked bar
+
+5️⃣ Mối quan hệ giữa thu nhập và chi tiêu
+
+Câu hỏi:
+
+Khách chi nhiều vì giàu hay vì vượt khả năng tài chính?
+
+Phân tích:
+
+Scatter yearly_income vs total_spending
+
+Ý nghĩa:
+
+Phát hiện nhóm rủi ro tài chính
+
+📊 Scatter plot
+
+6️⃣ Tỷ lệ nợ trên thu nhập (Debt-to-Income Ratio)
+
+Câu hỏi:
+
+Khách có đang vay quá khả năng không?
+
+Phân tích:
+
+total_debt / yearly_income
+
+Ý nghĩa:
+
+Đánh giá sức khỏe tài chính
+
+Điều chỉnh hạn mức tín dụng
+
+📊 Histogram, boxplot
+
+7️⃣ Mức sử dụng hạn mức tín dụng (Credit Utilization)
+
+Câu hỏi:
+
+Khách dùng thẻ tín dụng đến mức nào?
+
+Phân tích:
+
+Spending / credit_limit
+
+Ý nghĩa:
+
+Xác định khách tiềm năng tăng hạn mức
+
+Cảnh báo rủi ro vỡ nợ
+
+📊 Histogram
+
+8️⃣ Phân tích theo độ tuổi (Age-based Behavior)
+
+Câu hỏi:
+
+Mỗi độ tuổi chi tiêu khác nhau thế nào?
+
+Phân tích:
+
+Chi tiêu & MCC theo nhóm tuổi
+
+Ý nghĩa:
+
+Cá nhân hóa sản phẩm theo vòng đời
+
+📊 Boxplot theo age group
+
+9️⃣ Phân tích rủi ro gian lận (Fraud Pattern Analysis)
+
+Câu hỏi:
+
+Gian lận thường xảy ra ở đâu và với ai?
+
+Phân tích:
+
+Fraud rate theo MCC / city / transaction type
+
+Ý nghĩa:
+
+Tăng kiểm soát thông minh, không làm phiền khách tốt
+
+📊 Bar chart
+
+🔟 Phân khúc khách hàng tổng hợp (Customer Segmentation)
+
+Câu hỏi:
+
+Có thể chia khách hàng thành các nhóm rõ ràng không?
+
+Phân tích:
+
+Dùng các feature hành vi + tài chính
+
+Clustering (hoặc rule-based)
+
+Ý nghĩa:
+
+Trọng tâm của toàn bộ đề bài
+
+Nền tảng cho mọi đề xuất kinh doanh
+
+📊 PCA, radar chart
+
+🎯 Vì sao chỉ chọn 10 phân tích này?
+
+Vì chúng:
+
+✔ Gắn trực tiếp với mục tiêu đề bài
+
+✔ Có thể làm bằng EDA + Python
+
+✔ Dẫn thẳng tới phân khúc & đề xuất
+
+❌ Không sa vào kỹ thuật thuần túy
+
+👉 Nếu thiếu 1 trong 10, bài làm sẽ:
+
+Hoặc thiếu insight
+
+Hoặc không ra được chiến lược
+
+👉 Bước tiếp theo bạn nên làm
+
+Mình đề xuất thứ tự triển khai bằng Python:
+
+1️⃣ Spending distribution
+2️⃣ Transaction frequency
+3️⃣ MCC behavior
+4️⃣ Online vs offline
+5️⃣ Income vs spending
+6️⃣ Debt ratio
+7️⃣ Credit utilization
+8️⃣ Age behavior
+9️⃣ Fraud patterns
+🔟 Segmentation

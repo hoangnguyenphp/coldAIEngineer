@@ -1,0 +1,147 @@
+Bảng Transaction Data
+
+	id: Mô Tả Trường Dữ Liệu
+	date: Mã định danh độc nhất cho từng giao dịch đã được thực hiện
+	client_id: Ngày/Giờ thực hiện giao dịch
+
+	card_id: Mã định danh khách hàng giao dịch
+
+	amount: Mã định danh tài khoản (thẻ) giao dịch
+	use_chip: Giá trị của khoản giao dịch với + là nhận tiền và - là trừ tiền
+	merchant_id: Loại hình giao dịch bao gồm Swipe, Online, và Chip
+	Mã định danh merchant (là bên cung cấp hàng hóa, dịch vụ như nhà hàng,
+	siêu thị, ... )
+
+	merchant_city: Thành phố của merchant
+
+
+	merchant_state: Tiều bang (tại Hoa Kỳ) của merchant
+	zip: Zip code của merchant
+	mcc: Mã phân loại của merchant
+	errors: Lỗi của giao dịch (nếu có)
+	
+	
+Bảng Card Data
+	id: Mã định danh của thẻ
+
+	client_id: Mã định danh khách hàng sử dụng thẻ
+
+	card_brand: Nhãn hàng phát hành thẻ
+
+	card_type: Loại thẻ được phát hành bao gồm Debit, Debit (Prepaid) và Credit
+
+	card_number: Số thẻ
+
+	expires: Ngày hết hạn thẻ
+
+	CVV: Mã CVV của thẻ
+
+	has_chip: Biến binary thể hiện thẻ có hay không có chip
+	
+	num_cards_issued: Số lượng thẻ vật lý đã được cấp
+
+	credit_limit: Giới hạn tín dụng của thẻ 
+
+	acct_open_date: Ngày (bao gồm dữ liệu tháng và năm) mở thẻ
+
+	year_pin_last_changed: Năm của thời điểm cuối cùng mã PIN được thay đổi
+
+	card_on_dark_web: Biến binary thể hiện liệu thông tin thẻ đã được lan truyền trên dark web
+	
+	
+Bảng Users Data
+	id: Mã định danh độc nhất của khách hàng
+	current_age: Tuổi hiện tại của khách hàng
+	retirement_age: Tuổi nghỉ hưu của khách hàng
+
+	birth_year: Năm sinh của khách hàng
+	birth_month: Tháng sinh của khách hàng
+
+	gender: Giới tính của khách hàng
+
+	address: Địa chỉ của khách hàng
+
+	latitude/longitude: Thông số tọa độ địa chỉ của khách hàng
+	
+	per_capita_income: Thu nhập bình quân hằng năm hộ gia đình của chủ thẻ
+
+	yearly_income: Thu nhập hằng năm của chủ thẻ
+
+	total_debt: Tổng giá trị tất cả các khoản nợ của chủ thẻ
+
+	credit_score: Điểm tính dụng của chủ thẻ
+
+	num_credit_card: Số lượng thẻ mà chủ thẻ sở hữu
+	
+	
+Bảng MCC Code Data
+
+	MCC 1: Mô tả mã định danh nhóm merchant thứ nhất
+
+	MCC 2: Mô tả mã định danh nhóm merchant thứ hai
+
+	MCC 3: Mô tả mã định danh nhóm merchant thứ ba
+
+	..
+
+	MCC n: Mô tả mã định danh nhóm merchant thứ n
+	
+Bảng Fraud Label Data
+	index: Mã giao dịch được thực hiện
+
+	target: Biến binary thể hiện liệu có giao dịch đó có phải là giao dịch lừa đảo hay không
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

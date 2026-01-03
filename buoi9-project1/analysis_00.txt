@@ -1,0 +1,408 @@
+đây là đề bài của 1 lớp học data scient:
+
+Bối cảnh: Công ty X chuyên cung cấp các sản phẩm và dịch vụ tài chính cho khách hàng cá nhân và đang phát triển sản phẩm mới.
+Vấn đề: Công ty sở hữu một lượng lớn dữ liệu giao dịch của khách hàng và muốn tận dụng thông tin này để hiểu sâu hơn về hành vi, thói quen tiêu dùng, từ đó đưa ra các đề xuất sản phẩm tài chính phù hợp, nâng cao trải nghiệm khách hàng và tăng doanh thu.
+Mục tiêu phân tích:
+Phân tích hành vi khách hàng (khám phá các điểm dữ liệu, xu hướng).
+Xây dựng phân khúc khách hàng dựa trên những phát hiện.
+Phân tích hành vi của từng phân khúc để thấu hiểu khách hàng.
+Đề xuất hướng tiếp cận cho công ty X về từng nhóm phân khúc khách hàng.
+
+đây là thông tin các bảng dữ liệu
+
+Bảng Transaction Data
+
+	id: Mô Tả Trường Dữ Liệu
+	date: Mã định danh độc nhất cho từng giao dịch đã được thực hiện
+	client_id: Ngày/Giờ thực hiện giao dịch
+
+	card_id: Mã định danh khách hàng giao dịch
+
+	amount: Giá trị của khoản giao dịch với + là nhận tiền và - là trừ tiền
+	use_chip: Loại hình giao dịch bao gồm Swipe, Online, và Chip
+	merchant_id: Mã định danh merchant (là bên cung cấp hàng hóa, dịch vụ như nhà hàng,
+	siêu thị, ... )
+	merchant_city: Thành phố của merchant
+	merchant_state: Tiểu bang (tại Hoa Kỳ) của merchant
+	zip: Zip code của merchant
+	mcc: Mã phân loại của merchant
+	errors: Lỗi của giao dịch (nếu có)
+	
+	
+Bảng Card Data
+	id: Mã định danh của thẻ
+
+	client_id: Mã định danh khách hàng sử dụng thẻ
+
+	card_brand: Nhãn hàng phát hành thẻ
+
+	card_type: Loại thẻ được phát hành bao gồm Debit, Debit (Prepaid) và Credit
+
+	card_number: Số thẻ
+
+	expires: Ngày hết hạn thẻ
+
+	CVV: Mã CVV của thẻ
+
+	has_chip: Biến binary thể hiện thẻ có hay không có chip
+	
+	num_cards_issued: Số lượng thẻ vật lý đã được cấp
+
+	credit_limit: Giới hạn tín dụng của thẻ 
+
+	acct_open_date: Ngày (bao gồm dữ liệu tháng và năm) mở thẻ
+
+	year_pin_last_changed: Năm của thời điểm cuối cùng mã PIN được thay đổi
+
+	card_on_dark_web: Biến binary thể hiện liệu thông tin thẻ đã được lan truyền trên dark web
+	
+	
+Bảng Users Data
+	id: Mã định danh độc nhất của khách hàng
+	current_age: Tuổi hiện tại của khách hàng
+	retirement_age: Tuổi nghỉ hưu của khách hàng
+
+	birth_year: Năm sinh của khách hàng
+	birth_month: Tháng sinh của khách hàng
+
+	gender: Giới tính của khách hàng
+
+	address: Địa chỉ của khách hàng
+
+	latitude/longitude: Thông số tọa độ địa chỉ của khách hàng
+	
+	per_capita_income: Thu nhập bình quân hằng năm hộ gia đình của chủ thẻ
+
+	yearly_income: Thu nhập hằng năm của chủ thẻ
+
+	total_debt: Tổng giá trị tất cả các khoản nợ của chủ thẻ
+
+	credit_score: Điểm tính dụng của chủ thẻ
+
+	num_credit_card: Số lượng thẻ mà chủ thẻ sở hữu
+	
+	
+Bảng MCC Code Data
+
+	MCC 1: Mô tả mã định danh nhóm merchant thứ nhất
+
+	MCC 2: Mô tả mã định danh nhóm merchant thứ hai
+
+	MCC 3: Mô tả mã định danh nhóm merchant thứ ba
+
+	..
+
+	MCC n: Mô tả mã định danh nhóm merchant thứ n
+	
+Bảng Fraud Label Data
+	index: Mã giao dịch được thực hiện
+
+	target: Biến binary thể hiện liệu có giao dịch đó có phải là giao dịch lừa đảo hay không
+
+Hãy liệt kê ra những phân tích đáp ứng nhu cầu của đề bài trước, sau đó từ các phân tích chúng ta sẽ làm việc với python để vẽ các biểu đồ hoặc các việc tương tự. 
+
+
+
+
+
+Rất hay — đây là **một đề bài Data Science “chuẩn chỉnh”**, đủ để làm **EDA → Feature Engineering → Segmentation → Business Insight**.
+Mình sẽ trả lời theo đúng logic mà **giảng viên / interviewer / reviewer** mong đợi 👇
+
+---
+
+# 1️⃣ Tổng quan cách tiếp cận (định hướng tư duy)
+
+Dựa trên đề bài, **KHÔNG làm model ngay**, mà đi theo pipeline:
+
+1. **Khám phá dữ liệu (EDA)**
+   → Hiểu hành vi, thói quen, xu hướng
+
+2. **Xây dựng đặc trưng (Feature Engineering)**
+   → Biến dữ liệu thô thành insight định lượng
+
+3. **Phân khúc khách hàng (Customer Segmentation)**
+   → Dựa trên hành vi & năng lực tài chính
+
+4. **Phân tích từng phân khúc**
+   → Hiểu sâu “ai là ai”
+
+5. **Đề xuất chiến lược kinh doanh cho từng phân khúc**
+
+---
+
+# 2️⃣ Nhóm phân tích 1: Khám phá hành vi giao dịch khách hàng (EDA)
+
+### 2.1 Phân tích tổng quan giao dịch
+
+Mục tiêu: Hiểu “khách hàng đang tiêu tiền như thế nào”
+
+**Các phân tích nên làm:**
+
+* Số lượng giao dịch theo:
+
+  * Thời gian (ngày / tháng / năm)
+  * Khách hàng
+  * Thẻ
+* Phân phối `amount`:
+
+  * Trung bình / median / outlier
+* Tỷ lệ:
+
+  * Giao dịch online vs swipe vs chip
+* Giao dịch thành công vs lỗi (`errors`)
+
+📊 Biểu đồ:
+
+* Histogram amount
+* Line chart số giao dịch theo thời gian
+* Pie chart loại giao dịch
+
+---
+
+### 2.2 Phân tích hành vi chi tiêu theo danh mục (MCC)
+
+Mục tiêu: **Khách hàng chi tiền vào đâu?**
+
+**Phân tích:**
+
+* Tổng chi tiêu theo MCC
+* Số giao dịch theo MCC
+* MCC phổ biến nhất theo:
+
+  * Nhóm tuổi
+  * Giới tính
+  * Thu nhập
+
+📊 Biểu đồ:
+
+* Bar chart top MCC
+* Stacked bar theo nhóm tuổi / giới tính
+
+---
+
+### 2.3 Phân tích theo địa lý (Geo behavior)
+
+Mục tiêu: Hiểu thói quen chi tiêu theo vùng
+
+**Phân tích:**
+
+* Chi tiêu theo:
+
+  * City
+  * State
+* Khách hàng có giao dịch:
+
+  * Cùng bang vs khác bang
+* Khoảng cách:
+
+  * User location ↔ Merchant location
+
+📊 Biểu đồ:
+
+* Bar chart top city/state
+* Heatmap địa lý (nâng cao)
+
+---
+
+# 3️⃣ Nhóm phân tích 2: Hồ sơ tài chính & năng lực khách hàng
+
+### 3.1 Phân tích thu nhập – nợ – điểm tín dụng
+
+Mục tiêu: Hiểu **sức khỏe tài chính**
+
+**Phân tích:**
+
+* Phân phối:
+
+  * yearly_income
+  * total_debt
+  * credit_score
+* Tỷ lệ:
+
+  * Debt / Income
+* So sánh:
+
+  * Thu nhập vs chi tiêu thực tế
+
+📊 Biểu đồ:
+
+* Boxplot income, debt
+* Scatter income vs spending
+* Histogram credit_score
+
+---
+
+### 3.2 Phân tích thẻ & mức độ sử dụng thẻ
+
+Mục tiêu: Khai thác **giá trị thẻ**
+
+**Phân tích:**
+
+* Số lượng thẻ / khách hàng
+* Credit limit vs chi tiêu
+* Debit vs Credit usage
+* Thời gian mở thẻ (tenure)
+
+📊 Biểu đồ:
+
+* Bar card_type
+* Scatter credit_limit vs amount
+* Line tenure vs spending
+
+---
+
+# 4️⃣ Nhóm phân tích 3: Hành vi rủi ro & gian lận (Fraud-aware insight)
+
+⚠️ **Không train model**, chỉ phân tích hành vi
+
+### 4.1 Đặc điểm giao dịch gian lận
+
+Mục tiêu: Nhận diện pattern
+
+**Phân tích:**
+
+* Fraud rate theo:
+
+  * MCC
+  * Merchant city/state
+  * Loại giao dịch
+* Amount của fraud vs non-fraud
+* Card on dark web vs fraud
+
+📊 Biểu đồ:
+
+* Bar fraud rate theo MCC
+* Boxplot amount fraud vs non-fraud
+
+---
+
+### 4.2 Hồ sơ khách hàng rủi ro
+
+**Phân tích:**
+
+* Credit score của khách fraud vs non-fraud
+* Debt / income ratio
+* Số thẻ
+* Độ tuổi
+
+📊 Biểu đồ:
+
+* Histogram so sánh
+* Boxplot theo fraud label
+
+---
+
+# 5️⃣ Nhóm phân tích 4: Feature Engineering cho phân khúc
+
+👉 Đây là phần **rất quan trọng** cho segmentation
+
+### 5.1 Feature hành vi (Behavioral features)
+
+Ví dụ:
+
+* Avg transaction amount
+* Transaction frequency / month
+* % online transaction
+* Diversity of MCC (số MCC khác nhau)
+* Spending volatility (std amount)
+
+---
+
+### 5.2 Feature tài chính (Financial features)
+
+* Yearly income
+* Debt / income
+* Credit score
+* Credit utilization = spending / credit_limit
+
+---
+
+### 5.3 Feature nhân khẩu học (Demographic)
+
+* Age
+* Gender
+* Location cluster
+
+---
+
+# 6️⃣ Nhóm phân tích 5: Phân khúc khách hàng (Customer Segmentation)
+
+### 6.1 Phân khúc dựa trên:
+
+* Hành vi chi tiêu
+* Sức khỏe tài chính
+* Mức độ rủi ro
+
+👉 Có thể dùng:
+
+* Rule-based segmentation (cho lớp cơ bản)
+* KMeans / Hierarchical (cho lớp nâng cao)
+
+📊 Biểu đồ:
+
+* Elbow curve
+* PCA scatter plot
+* Radar chart cho từng cluster
+
+---
+
+### 6.2 Ví dụ các phân khúc kỳ vọng
+
+* **High Income – High Spending**
+* **Young Digital Spenders**
+* **Low Income – High Debt**
+* **Conservative / Low Activity**
+* **High Risk / Fraud-prone**
+
+---
+
+# 7️⃣ Nhóm phân tích 6: Phân tích sâu từng phân khúc
+
+Cho mỗi cluster:
+
+* Tuổi trung bình
+* Thu nhập
+* MCC phổ biến
+* Hành vi online
+* Fraud rate
+
+📊 Biểu đồ:
+
+* Radar chart
+* Bar comparison giữa cluster
+
+---
+
+# 8️⃣ Nhóm phân tích 7: Đề xuất chiến lược cho công ty X
+
+Ví dụ:
+
+| Phân khúc     | Insight               | Đề xuất              |
+| ------------- | --------------------- | -------------------- |
+| High Income   | Chi tiêu lớn, ổn định | Upsell premium card  |
+| Young Digital | Online nhiều          | Digital wallet, BNPL |
+| High Debt     | Rủi ro                | Cảnh báo tín dụng    |
+| Fraud-prone   | Gian lận cao          | Giám sát nâng cao    |
+
+---
+
+# 9️⃣ Lộ trình tiếp theo (Python)
+
+👉 Bước tiếp theo chúng ta có thể làm lần lượt:
+
+1. Load & clean data
+2. EDA từng bảng
+3. Join tables
+4. Feature engineering
+5. Vẽ biểu đồ (matplotlib / seaborn)
+6. Segmentation
+
+---
+
+Nếu bạn muốn, mình có thể:
+
+* 🔹 Chuyển toàn bộ phần trên thành **outline notebook Data Science**
+* 🔹 Hoặc bắt đầu **viết code Python từ bước 1**
+* 🔹 Hoặc giúp bạn **viết report đúng chuẩn Data Scientist**
+
+👉 Bạn muốn **bắt đầu từ bước nào?**

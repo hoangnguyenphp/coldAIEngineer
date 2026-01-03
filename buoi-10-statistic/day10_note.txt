@@ -1,0 +1,44 @@
+Thống kê mô tả: đặc điểm của dữ liệu: giá trị trung bình, mức độ hội tụ, trung vị, độ lệch chuẩn.
+Thống kê suy luận: sử dụng 1 mẫu dữ liệu để suy ra tổng thể với các kỹ thuật như kiểm định giả thuyết, ước lượng khoảng tin cậy, phân tích tương quan.
+
+============
+Thống kê mô tả
+	Trung bình (Mean): tổng của n / n . Ex: [5, 5, 5.5, 6, 6, 6.5, 25] => ít ý nghĩa vì 25 là giá trị ngoại lai quá lớn => nhạy cảm với giá trị ngoại lai => cần trung vị
+	Trung vị (Median): dữ liệu phải được sắp xếp theo thứ tự
+		n lẻ -> trung vị = (n+ 1) /2
+		n chẵn -> trung vị = (n/2 + n/2 + 1)/2
+		
+	Yếu vị (Mode): giá trị xuất hiện nhiều nhất trong bộ dữ liệu, sử dụng được với dữ liệu không phải là số (sử dụng histogram)
+	
+	Đo lường độ phân tán của dữ liệu:
+		Phương Sai(Variance): đo độ lệch của mỗi giá trị so với giá trị trung bình: sigma^2 = σ^2 = tổng[(từng giá trị - giá trị trung bình)^2] / n
+			ex:
+			[1, 2, 8, 9] => sigma^2 = 12,5 => độ lệch chuẩn lớn => dữ liệu phân tán lớn => không tốt
+			[4, 5, 5, 6] => sigma^2 = 0.4 => độ lệch chuẩn nhỏ => dữ liệu hội tụ => tốt
+			
+			tại sao cần bình phương? => vì tránh giá trị âm.
+			
+			Nhược điểm: giá trị bình phương làm khuếch đại sự sai khác => cần độ lệch chuẩn
+		
+		Độ lệch chuẩn(Standard Deviation): căn bậc 2 của sigma^2 (căn bậc 2 của phương sai) = sigma = σ
+		
+		Phạm vi (Range): max - min
+		
+	Đo lường vị trí tương đối của dữ liệu
+		Phân vị (Percentiles): phân vị là giá trị mà dưới nó có k% các giá trị trong tập dữ liệu
+			Ví dụ: một học sinh đạt 8 diểm văn thì vui nhưng 8 điểm toán thì buồn. Vì 8 điểm văn cao hơn 90% các học sinh khác, còn 8 điểm toán chỉ cao hơn 60% các học sinh khác.
+			
+			Pk = X(k x (n+1)/100)
+			
+		IQR(phân vị 50%) = Q3(phân vị 75%) - Q1 (phân vị 25%) (75% và 25% để né giá trị ngoại lai ở hai đầu)
+			
+		Z-score: cho biết giá trị nằm cách trung bình bao nhiêu độ lệch chuẩn.
+			Z = (giá trị - giá trị trung bình) / σ
+			
+		Phân bố dữ liệu: đường cong mô tả tần suất của các giá trị xuất hiện
+			Phân phối chuẩn (Gaussian) - normal curl: đường cong cân xứng 2 bên ( bên trái thâp - ở giữa cao - bên phải thấp) : trung bình ~ trung vị
+			Phân phối lệch trái: bên trái cao - ở giữa thấp - bên phải thấp
+			Phân phối lệch trái: bên trái thấp - ở giữa thấp - bên phải cao
+			
+		
+
