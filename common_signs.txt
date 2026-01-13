@@ -1,0 +1,9 @@
+∑: sum
+α: alpha
+θ (theta): parameter
+σ: sigma
+μ: mu
+τ:  bandwidth
+∂: partial (partial derivative symbol)
+Δ: delta:
+ŷ: prediction result from model.
