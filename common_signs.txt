@@ -7,3 +7,4 @@
 ∂: partial (partial derivative symbol)
 Δ: delta:
 ŷ: prediction result from model.
+√
