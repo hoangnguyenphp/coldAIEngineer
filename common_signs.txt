@@ -7,4 +7,20 @@
 ∂: partial (partial derivative symbol)
 Δ: delta:
 ŷ: prediction result from model.
-√
+√: căn bậc 2
+φ → lowercase phi
+ϕ → variant lowercase phi
+Φ → uppercase Phi
+⊆: belong
+rˉ
+
+
+Mất bao lâu thì thành thục
+Nền tảng toán học của giảng viên?
+Chuẩn hóa dữ liệu: bias trong 1 feature, bias giữa các feature.
+Khi nào thì dùng neuron network khi nào thì dùng regression
+Những công cụ, tài liệu nào để nghiên cứu sâu, cập nhật về. Hướng dẫn sử dụng Kagal
+cần giải thích lại boxplot?
+Việc đưa dữ liệu vào mô hình quá đơn giản, vậy điều gì để tạo ra sự khác biệt với thị trường: phân tích nhiều góc nhìn, hiểu sâu về model...
+
+quá trình biến đổi dữ liệu của dữ liệu trong neuron network
